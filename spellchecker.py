@@ -5,9 +5,27 @@ import multiDictionary as md
 class SpellChecker:
 
     def __init__(self):
-        pass
+        self.diz = md.MultiDictionary()
 
     def handleSentence(self, txtIn, language):
+        txt = replaceChars(txtIn)
+        print("Contains")
+        a = time.time()
+        self.diz.searchWord(txt, language)
+        b = time.time()
+        print(b-a)
+        print("---------")
+        print("Linear")
+        a = time.time()
+        self.diz.searchWordLinear(txt, language)
+        b = time.time()
+        print(b - a)
+        print("---------")
+        print("Dicotomico")
+        a = time.time()
+        self.diz.searchWordDichotomic(txt, language)
+        b = time.time()
+        print(b - a)
         pass
 
     def printMenu(self):
@@ -23,4 +41,7 @@ class SpellChecker:
 
 
 def replaceChars(text):
-    pass
+    chars = "\\*_{}[]()>#+-.!$%^;,=_~"
+    for c in chars:
+        text = text.replace(c, "")
+    return text
